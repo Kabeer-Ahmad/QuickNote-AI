@@ -8,15 +8,6 @@ A production-ready AI-powered notes web app built with Next.js, Supabase, and mu
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS-38B2AC?style=flat-square&logo=tailwind-css)](https://tailwindcss.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
-## Screenshots
-
-<div align="center">
-  <img src="https://via.placeholder.com/800x400/1a1a1a/ffffff?text=Landing+Page" alt="Landing Page" width="400"/>
-  <img src="https://via.placeholder.com/800x400/1a1a1a/ffffff?text=Dashboard" alt="Dashboard" width="400"/>
-  <img src="https://via.placeholder.com/800x400/1a1a1a/ffffff?text=Note+Editor" alt="Note Editor" width="400"/>
-  <img src="https://via.placeholder.com/800x400/1a1a1a/ffffff?text=AI+Summary" alt="AI Summary" width="400"/>
-</div>
-
 ## Features
 
 - 🔐 **Secure Authentication** - Email and password authentication
