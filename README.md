@@ -2,6 +2,21 @@
 
 A production-ready AI-powered notes web app built with Next.js, Supabase, and multiple AI providers. Create, manage, and summarize your notes with intelligent AI assistance.
 
+[![Next.js](https://img.shields.io/badge/Next.js-15+-black?style=flat-square&logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5+-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
+[![Supabase](https://img.shields.io/badge/Supabase-Database-green?style=flat-square&logo=supabase)](https://supabase.com/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS-38B2AC?style=flat-square&logo=tailwind-css)](https://tailwindcss.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
+
+## Screenshots
+
+<div align="center">
+  <img src="https://via.placeholder.com/800x400/1a1a1a/ffffff?text=Landing+Page" alt="Landing Page" width="400"/>
+  <img src="https://via.placeholder.com/800x400/1a1a1a/ffffff?text=Dashboard" alt="Dashboard" width="400"/>
+  <img src="https://via.placeholder.com/800x400/1a1a1a/ffffff?text=Note+Editor" alt="Note Editor" width="400"/>
+  <img src="https://via.placeholder.com/800x400/1a1a1a/ffffff?text=AI+Summary" alt="AI Summary" width="400"/>
+</div>
+
 ## Features
 
 - 🔐 **Secure Authentication** - Email and password authentication
@@ -35,9 +50,9 @@ A production-ready AI-powered notes web app built with Next.js, Supabase, and mu
 ### 1. Clone and Install
 
 ```bash
-git clone <your-repo-url>
-cd quicknote-ai
-pnpm install
+git clone https://github.com/Kabeer-Ahmad/QuickNote-AI.git
+cd QuickNote-AI
+npm install
 ```
 
 ### 2. Environment Setup
@@ -59,14 +74,14 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY="your-supabase-anon-key"
 NEXT_PUBLIC_SITE_URL="http://localhost:3000"
 
 # AI Provider Configuration
-AI_PROVIDER=openai
+AI_PROVIDER=gemini
 
-# OpenAI (Default)
-OPENAI_API_KEY="your-openai-api-key"
-
-# Google Gemini (Optional)
+# Google Gemini (Default)
 GOOGLE_API_KEY="your-google-api-key"
-GEMINI_MODEL="gemini-1.5-flash"
+GEMINI_MODEL="gemini-2.0-flash-lite"
+
+# OpenAI (Optional)
+OPENAI_API_KEY="your-openai-api-key"
 
 # Anthropic Claude (Optional)
 ANTHROPIC_API_KEY="your-anthropic-api-key"
@@ -161,7 +176,7 @@ CREATE POLICY "delete_own_notes" ON public.notes FOR DELETE
 ### 5. Run Development Server
 
 ```bash
-pnpm dev
+npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
@@ -182,9 +197,9 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ### AI Summarization
 - Click "Generate Summary" in the note editor
-- AI will create a concise summary with bullet points and TL;DR
+- AI will create a concise summary with bullet points and "In Short:" format
 - Summaries are saved with your notes
-- Works with OpenAI, Gemini, or Claude
+- Works with OpenAI, Gemini 2.0 Flash-Lite, or Claude
 
 ### Keyboard Shortcuts
 - `Cmd/Ctrl + S` - Save note in editor
@@ -206,43 +221,54 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 NEXT_PUBLIC_SUPABASE_URL="your-production-supabase-url"
 NEXT_PUBLIC_SUPABASE_ANON_KEY="your-production-supabase-anon-key"
 NEXT_PUBLIC_SITE_URL="https://your-domain.com"
-AI_PROVIDER="openai"
-OPENAI_API_KEY="your-openai-api-key"
+AI_PROVIDER="gemini"
+GOOGLE_API_KEY="your-google-api-key"
+GEMINI_MODEL="gemini-2.0-flash-lite"
 ```
 
 ## Project Structure
 
 ```
-quicknote-ai/
-├── app/                    # Next.js App Router
-│   ├── api/               # API routes
-│   ├── signin/            # Sign in page
-│   ├── signup/            # Sign up page
-│   ├── globals.css        # Global styles
-│   ├── layout.tsx         # Root layout
-│   └── page.tsx           # Home page (landing or notes)
-├── components/            # React components
-│   ├── ui/               # shadcn/ui components
-│   ├── header.tsx        # App header
-│   ├── footer.tsx        # App footer
-│   ├── landing-page.tsx  # Landing page component
-│   ├── sign-in-card.tsx  # Authentication UI
-│   ├── note-card.tsx     # Note display card
-│   ├── note-form.tsx     # Note creation/editing
-│   ├── note-editor-dialog.tsx # Note editor modal
-│   ├── empty-state.tsx   # Empty state component
-│   └── conditional-layout.tsx # Conditional header/footer
-├── lib/                  # Utility libraries
-│   ├── types.ts          # TypeScript types & Zod schemas
-│   ├── utils.ts          # Utility functions
-│   ├── supabase-browser.ts # Supabase client
-│   ├── database.types.ts # Database types
-│   └── ai.ts             # AI provider adapter
-├── providers/            # React context providers
-│   ├── query-provider.tsx # React Query setup
-│   └── auth-provider.tsx # Authentication context
-└── hooks/                # Custom React hooks
-    └── use-toast.ts      # Toast notifications
+QuickNote-AI/
+├── app/                           # Next.js App Router
+│   ├── api/                      # API routes
+│   │   └── summarize/            # AI summarization endpoint
+│   ├── signin/                   # Sign in page
+│   ├── signup/                   # Sign up page
+│   ├── globals.css               # Global styles & CSS variables
+│   ├── layout.tsx                # Root layout with providers
+│   └── page.tsx                  # Home page (landing or dashboard)
+├── components/                   # React components
+│   ├── ui/                      # shadcn/ui components
+│   │   ├── button.tsx
+│   │   ├── card.tsx
+│   │   ├── dialog.tsx
+│   │   ├── input.tsx
+│   │   └── ...
+│   ├── header.tsx               # App header with auth
+│   ├── footer.tsx               # App footer
+│   ├── landing-page.tsx         # Landing page component
+│   ├── note-card.tsx            # Note display card
+│   ├── note-form.tsx            # Note creation/editing form
+│   ├── note-editor-dialog.tsx   # Note editor modal
+│   ├── rich-text-editor.tsx     # Rich text editing component
+│   ├── empty-state.tsx          # Empty state component
+│   └── conditional-layout.tsx   # Conditional header/footer
+├── lib/                         # Utility libraries
+│   ├── types.ts                 # TypeScript types & Zod schemas
+│   ├── utils.ts                 # Utility functions
+│   ├── supabase-browser.ts      # Supabase client
+│   └── ai.ts                    # AI provider adapter
+├── providers/                   # React context providers
+│   ├── query-provider.tsx       # React Query setup
+│   └── auth-provider.tsx        # Authentication context
+├── hooks/                       # Custom React hooks
+│   └── use-toast.ts             # Toast notifications
+├── public/                      # Static assets
+├── .env.local                   # Environment variables (not in repo)
+├── env.template                 # Environment template
+├── supabase-setup.sql           # Database schema
+└── README.md                    # This file
 ```
 
 ## API Endpoints
@@ -271,7 +297,7 @@ Check AI provider availability.
 ```json
 {
   "available": true,
-  "provider": "openai"
+  "provider": "gemini"
 }
 ```
 
@@ -334,9 +360,23 @@ Check AI provider availability.
 
 MIT License - see LICENSE file for details.
 
+## Live Demo
+
+🚀 **[Try QuickNote AI Live](https://quicknote-ai.vercel.app)** (Coming Soon)
+
 ## Support
 
 For issues and questions:
 - Check the troubleshooting section
-- Open an issue on GitHub
+- Open an issue on [GitHub](https://github.com/Kabeer-Ahmad/QuickNote-AI/issues)
 - Review Supabase and AI provider documentation
+
+## Star ⭐
+
+If you found this project helpful, please give it a star on GitHub!
+
+## Author
+
+**Kabeer Ahmad**
+- GitHub: [@Kabeer-Ahmad](https://github.com/Kabeer-Ahmad)
+- LinkedIn: [Kabeer Ahmad](https://linkedin.com/in/kabeer-ahmad)
